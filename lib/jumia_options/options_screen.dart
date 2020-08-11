@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:jumia_food_clone/constants/styles.dart';
+import 'package:jumia_food_clone/drawer/drawer.dart';
 import 'package:jumia_food_clone/jumia_options/option_model_data.dart';
 
+OptionData optionData = OptionData();
+
 class OptionScreen extends StatelessWidget {
-  OptionData optionData = OptionData();
   @override
   Widget build(BuildContext context) {
+    final options = optionData.options;
+
     return Scaffold(
       appBar: AppBar(
         title: Column(
@@ -26,18 +30,32 @@ class OptionScreen extends StatelessWidget {
           ],
         ),
       ),
-      drawer: Drawer(
-        child: Column(
-          children: <Widget>[
-            UserAccountsDrawerHeader(accountName: Text(""), accountEmail: null)
-          ],
-        ),
-      ),
+      drawer: AppDrawer(),
       body: ListView.builder(
-        itemCount: optionData.options.length,
-          itemBuilder: (BuildContext context, int index) => ListTile(
-                title: Text(optionData.options[index].title),
-              )),
+        itemCount: options.length,
+        itemBuilder: (BuildContext context, int index) {
+        
+                    return Card(
+                    elevation: 2.0,
+                    margin: EdgeInsets.all(10),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: ListTile(
+                        title: Text(options[index].title, style: optionTitletextStyle,),
+              subtitle: Text(
+                options[index].subtitle,
+              ),
+              leading: Icon(
+                options[index].icon,
+                color: Colors.orange,
+                size: 50,
+              ),
+            ),
+          ),
+        );
+        },
+      ),
     );
   }
 }
+
