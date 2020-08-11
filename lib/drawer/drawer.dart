@@ -35,6 +35,7 @@ class AppDrawer extends StatelessWidget {
           Container(
             height: MediaQuery.of(context).size.height/1.7,
             child: ListView(
+              padding: EdgeInsets.zero,
               children: <Widget>[
  ...drawerOptions
                 .map((drawerTile) => ListTile(
